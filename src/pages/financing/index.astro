@@ -1,0 +1,93 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import { site } from '../../data/site';
+
+const title = `Financing & Rentals | ${site.name}`;
+const description = `${site.name} offers rental and finance options on water heaters, furnaces, air conditioners, and boilers through the Vista Credit program, with no-charge installation and monthly pre-authorized payment.`;
+
+const breadcrumb = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Financing & Rentals', item: `${site.url}/financing/` },
+  ],
+});
+
+const residential = [
+  'No-charge installation on qualifying equipment',
+  'Parts and labour covered on manufacturer defects',
+  'Monthly pre-authorized payment',
+  'Rate-increase protection',
+  'Transferable to a new owner',
+  'Option for new equipment on a set cycle',
+];
+const commercial = [
+  'Operating lease structure',
+  'Three to ten year terms',
+  'No upfront capital cost',
+  'Rebate-eligible equipment',
+  'Suited to condos, rental apartments, and retail',
+];
+---
+
+<Base title={title} description={description} path="/financing/" active="financing" schemaBlocks={[breadcrumb]}>
+
+  <section class="section pillar-detail">
+    <div class="container pillar-detail__wrap">
+      <nav class="pillar-detail__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Financing &amp; Rentals</span>
+      </nav>
+      <span class="eyebrow">Vista Credit</span>
+      <h1>Rent or finance the equipment, your way</h1>
+      <p class="lede">Not every job has to be paid up front. Through our Vista Credit program, {site.name} offers rental and finance options on the equipment most households and businesses replace over time, so the work gets done without the full cost hitting at once.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container pillars__grid" style="grid-template-columns:1fr 1fr">
+      <div class="pillar-card" style="cursor:default">
+        <div class="pillar-card__body">
+          <h3><Icon name="droplet" size={20} /> Water Heater Rental &amp; Finance</h3>
+          <p style="margin-top:6px">For homes, rental and finance on water heaters, furnaces, air conditioners, and boilers, designed to spread the cost and keep the equipment current.</p>
+          <ul class="pillar-detail__bullets" style="margin-top:16px;background:var(--sand)">
+            {residential.map((b) => <li><Icon name="check" size={16} /> {b}</li>)}
+          </ul>
+        </div>
+      </div>
+      <div class="pillar-card" style="cursor:default">
+        <div class="pillar-card__body">
+          <h3><Icon name="shield" size={20} /> Commercial Lease Program</h3>
+          <p style="margin-top:6px">For condos, rental apartments, and retail, an operating lease that keeps capital costs down and the mechanicals up to date.</p>
+          <ul class="pillar-detail__bullets" style="margin-top:16px;background:var(--sand)">
+            {commercial.map((b) => <li><Icon name="check" size={16} /> {b}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-espresso">
+    <div class="container cta-band reveal">
+      <h2>Get the numbers for your job</h2>
+      <p class="lede">Tell us what you need and we will walk you through the rental and the purchase numbers honestly so you can choose what fits. Exact terms are confirmed at the time of the quote.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary btn-lg" href="/contact/"><Icon name="send" size={19} /> Get a Quote</a>
+        <a class="btn btn-cobalt-line btn-lg" href={`tel:${site.phone.tel}`}><Icon name="phone" size={19} /> {site.phone.display}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact" id="contact">
+    <div class="container contact__grid">
+      <div class="contact__intro reveal">
+        <h2>Ask about financing</h2>
+        <p>Send a few details about the equipment you need and we will call you back with the options.</p>
+        <a class="contact__phone" href={`tel:${site.phone.tel}`}><Icon name="phone" size={20} /> {site.phone.display}</a>
+      </div>
+      <div class="reveal d1"><QuoteForm id="financing-quote" defaultService="Financing & rentals" /></div>
+    </div>
+  </section>
+
+</Base>

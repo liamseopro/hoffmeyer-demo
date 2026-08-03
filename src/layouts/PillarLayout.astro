@@ -1,0 +1,84 @@
+---
+import Base from './Base.astro';
+import Icon from '../components/Icon.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { site } from '../data/site';
+import { pillars } from '../data/content';
+
+interface Props { slug: string; schemaBlocks?: string[]; }
+const { slug, schemaBlocks = [] } = Astro.props;
+const pillar = pillars.find((p) => p.slug === slug)!;
+const others = pillars.filter((p) => p.slug !== slug);
+
+const title = `${pillar.name} in Goderich & Huron County | ${site.name}`;
+const description = `${pillar.short} From ${site.name}, a plumbing, heating, and cooling contractor serving ${site.address.locality} and across Huron County since ${site.est}.`;
+
+const breadcrumb = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+    { '@type': 'ListItem', position: 2, name: pillar.name, item: `${site.url}/${pillar.slug}/` },
+  ],
+});
+---
+<Base title={title} description={description} path={`/${pillar.slug}/`} active={pillar.slug} schemaBlocks={[breadcrumb, ...schemaBlocks]}>
+
+  <section class="section pillar-detail">
+    <div class="container pillar-detail__wrap">
+      <nav class="pillar-detail__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{pillar.name}</span>
+      </nav>
+      {pillar.flagship && <span class="eyebrow"><Icon name={pillar.icon} size={15} /> The Hoffmeyer namesake</span>}
+      <h1>{pillar.h2}</h1>
+      <p class="lede">{pillar.lede}</p>
+      <div class="pillar-detail__body">
+        {pillar.body.map((p) => <p set:html={p}></p>)}
+        <ul class="pillar-detail__bullets">
+          {pillar.bullets.map((b) => <li><Icon name="check" size={16} /> {b}</li>)}
+        </ul>
+        {pillar.brands && pillar.brands.length && (
+          <p class="pillar-detail__brands"><b>Equipment we carry:</b> {pillar.brands.join(', ')}</p>
+        )}
+      </div>
+
+      <slot />
+
+      <div style="margin-top:30px">
+        <a class="btn btn-primary btn-lg" href="/contact/"><Icon name="send" size={19} /> Get a Quote</a>
+        <a class="btn btn-outline btn-lg" href={`tel:${site.phone.tel}`} style="margin-left:10px"><Icon name="phone" size={19} /> {site.phone.display}</a>
+      </div>
+    </div>
+  </section>
+
+  {/* More services on this site (within-domain IA, not a cross-domain network footer). */}
+  <section class="section pillars bg-sand-2">
+    <div class="container">
+      <div class="shead center"><span class="eyebrow">More from Hoffmeyer</span><h2>Other services we offer</h2></div>
+      <div class="pillars__grid">
+        {others.map((p) => (
+          <a class="pillar-card" href={`/${p.slug}/`}>
+            <div class="pillar-card__media"><img src={p.image} alt={p.imageAlt} loading="lazy" width="600" height="400" /></div>
+            <div class="pillar-card__body"><h3>{p.name}</h3><p>{p.short}</p><span class="pillar-card__link">Explore {p.nav} <Icon name="arrowRight" size={15} /></span></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* CTA + quote form. */}
+  <section class="section contact" id="contact">
+    <div class="container contact__grid">
+      <div class="contact__intro reveal">
+        <h2>Talk to us about {pillar.nav.toLowerCase()}</h2>
+        <p>Send a few details and we will call you back, usually within the hour during office hours.</p>
+        <a class="contact__phone" href={`tel:${site.phone.tel}`}><Icon name="phone" size={20} /> {site.phone.display}</a>
+      </div>
+      <div class="reveal d1">
+        <QuoteForm id={`${pillar.slug}-quote`} defaultService={pillar.name} />
+      </div>
+    </div>
+  </section>
+
+</Base>

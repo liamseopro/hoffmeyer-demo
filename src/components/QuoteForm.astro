@@ -1,0 +1,75 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+import { pillars } from '../data/content';
+interface Props { id?: string; defaultService?: string; compact?: boolean; }
+const { id = 'quote', defaultService } = Astro.props;
+const options = [...pillars.map((p) => p.name), 'Financing & rentals', 'Emergency repair', 'Maintenance', 'Something else'];
+---
+<form class="qcard" id={id} action={site.webhookUrl} method="POST" novalidate>
+  <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  <h3>Request a call-back</h3>
+  <p class="qcard__sub">Send a few details and we will call you back, usually within the hour during office hours.</p>
+  <div class="field">
+    <label for={`${id}-name`}>Name</label>
+    <input id={`${id}-name`} name="name" type="text" required autocomplete="name" placeholder="Your name" />
+  </div>
+  <div class="field">
+    <label for={`${id}-phone`}>Phone</label>
+    <input id={`${id}-phone`} name="phone" type="tel" required autocomplete="tel" placeholder="(519) 555-0123" />
+  </div>
+  <div class="field">
+    <label for={`${id}-service`}>What do you need?</label>
+    <select id={`${id}-service`} name="service">
+      {options.map((o) => <option value={o} selected={o === defaultService}>{o}</option>)}
+    </select>
+  </div>
+  <div class="field">
+    <label for={`${id}-msg`}>Anything else? (optional)</label>
+    <textarea id={`${id}-msg`} name="message" rows="3" placeholder="Tell us about your home, your system, or the best time to call"></textarea>
+  </div>
+  <button class="btn btn-primary btn-lg" type="submit"><Icon name="send" size={19} /> <span class="btn__label">Request call-back</span></button>
+  <p class="qcard__note">We reply within the hour during office hours. For emergencies, call the 24-hour line.</p>
+  <div class="qcard__done" role="status" tabindex="-1" hidden>
+    <Icon name="check" size={28} />
+    <h3>Request received</h3>
+    <p>We will call you back within the hour during office hours. For an emergency, call <a href={`tel:${site.phoneEmergency.tel}`}>{site.phoneEmergency.display}</a>.</p>
+  </div>
+</form>
+
+<script>
+  // Submit by fetch so the visitor never lands on the raw webhook response.
+  // Wires every .qcard on the page (the component may render more than once).
+  document.querySelectorAll('form.qcard').forEach((el) => {
+    const form = el;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      const done = form.querySelector('.qcard__done');
+      const note = form.querySelector('.qcard__note');
+      const honey = form.querySelector('input[name="_honey"]');
+      const label = btn?.querySelector('.btn__label');
+      if (!btn || !done) return;
+      btn.disabled = true;
+      if (label) label.textContent = 'Sending...';
+      try {
+        if (!honey?.value) {
+          await fetch(form.action, { method: 'POST', mode: 'no-cors', body: new FormData(form) });
+        }
+        form.querySelectorAll('.field').forEach((f) => f.setAttribute('hidden', ''));
+        const sub = form.querySelector('.qcard__sub');
+        const h3 = form.querySelector('.qcard > h3');
+        if (h3) h3.hidden = true;
+        if (sub) sub.hidden = true;
+        btn.hidden = true;
+        if (note) note.hidden = true;
+        done.hidden = false;
+        done.focus();
+      } catch {
+        btn.disabled = false;
+        if (label) label.textContent = 'Try again';
+        if (note) note.textContent = 'Something went wrong sending your request. Please call (519) 524-7861 and we will help right away.';
+      }
+    });
+  });
+</script>

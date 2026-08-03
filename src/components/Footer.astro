@@ -1,0 +1,50 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+import { pillars, LOCATIONS, AREAS } from '../data/content';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <span class="brand__wordmark">Hoffmeyer Plumbing &amp; Heating Ltd.</span>
+      <p>Plumbing, heating, cooling, and gas contractor based at 55 Kingston St in Goderich, serving Goderich and Huron County since 1958. Three generations, one shop, now part of the Jayden's Mechanical family.</p>
+      <a class="family" href={site.partner.url} target="_blank" rel="noopener">
+        <span class="familybar__chip"><img src="/assets/img/jaydens-mechanical.png" alt="Jayden's Mechanical" width="452" height="76" loading="lazy" /></span>
+        Part of the Jayden's Mechanical family
+      </a>
+    </div>
+    <nav class="footer-links" aria-label="Services">
+      <h4>Services</h4>
+      {pillars.map((p) => <a href={`/${p.slug}/`}>{p.name}</a>)}
+      <a href="/financing/">Financing &amp; Rentals</a>
+      <a href="/#services">All services</a>
+    </nav>
+    <nav class="footer-links" aria-label="Service areas">
+      <h4>Service Areas</h4>
+      {LOCATIONS.map((l) => <a href={`/locations/${l.slug}/`}>{l.name}</a>)}
+      <a href="/service-areas/">All towns</a>
+    </nav>
+    <div class="footer-links footer-contact">
+      <h4>Contact</h4>
+      <li><Icon name="mapPin" size={17} /> <span>{site.address.street}, {site.address.locality}, {site.address.region} {site.address.postal}</span></li>
+      <li><Icon name="phone" size={17} /> <a href={`tel:${site.phone.tel}`}>{site.phone.display}</a></li>
+      <li><Icon name="clock" size={17} /> <span>{site.hours.weekdays}<br />{site.hours.saturday}<br />{site.hours.emergency}</span></li>
+      <li style="margin-top:6px"><a href="/about/">About</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </div>
+  </div>
+  <div class="container footer-areas">
+    <p class="footer-areas__label">Serving Goderich &amp; Huron County</p>
+    <p class="footer-areas__list">{AREAS.join(' · ')}</p>
+  </div>
+  <div class="container footer-bottom">
+    <p>&copy; {year} {site.legalName}, operating as {site.name}. All rights reserved.</p>
+    <p><a href="/privacy/">Privacy</a></p>
+  </div>
+</footer>
+
+<div class="mobile-bar">
+  <a class="btn btn-espresso" href={`tel:${site.phone.tel}`}><Icon name="phone" size={18} /> Call</a>
+  <a class="btn btn-primary" href="/contact/"><Icon name="send" size={18} /> Get a Quote</a>
+</div>

@@ -1,0 +1,64 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import { site } from '../../data/site';
+import { LOCATIONS, AREAS } from '../../data/content';
+
+const title = `Service Areas | ${site.name}`;
+const description = `${site.name} is a plumbing, heating, and cooling contractor based in Goderich, serving Huron County including Clinton, Bayfield, Seaforth, Blyth, Auburn, Hensall, and Zurich.`;
+
+const breadcrumb = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Service Areas', item: `${site.url}/service-areas/` },
+  ],
+});
+---
+<Base title={title} description={description} path="/service-areas/" active="service-areas" schemaBlocks={[breadcrumb]}>
+
+  <section class="section pillar-detail">
+    <div class="container pillar-detail__wrap">
+      <nav class="pillar-detail__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Service Areas</span>
+      </nav>
+      <span class="eyebrow">Where we work</span>
+      <h1>Serving Huron County from Goderich</h1>
+      <p class="lede">{site.name} is based at {site.address.street} in {site.address.locality}, and our licensed plumbers and gas-certified HVAC technicians serve customers across Huron County and the surrounding country. Some of the communities we serve have their own pages below.</p>
+    </div>
+  </section>
+
+  <section class="section pillars bg-sand-2">
+    <div class="container">
+      <div class="shead"><span class="eyebrow">Town pages</span><h2>Communities we serve</h2></div>
+      <div class="pillars__grid">
+        {LOCATIONS.map((l) => (
+          <a class="pillar-card" href={`/locations/${l.slug}/`}>
+            <div class="pillar-card__body"><h3>{l.name}</h3><p>{l.county}</p><span class="pillar-card__link">View {l.name} <Icon name="arrowRight" size={15} /></span></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-espresso">
+    <div class="container">
+      <div class="shead" style="margin-bottom:24px"><span class="eyebrow on-dark">Beyond these towns</span><h2>The wider region we cover</h2></div>
+      <p style="color:var(--on-espresso-soft);max-width:70ch;line-height:1.9;font-size:1.05rem">{AREAS.join(' · ')}</p>
+      <p style="color:var(--on-espresso-soft);margin-top:18px;max-width:62ch">Not sure whether we reach your address? Call us at <a href={`tel:${site.phone.tel}`}>{site.phone.display}</a> and we will confirm.</p>
+    </div>
+  </section>
+
+  <section class="section contact" id="contact">
+    <div class="container contact__grid">
+      <div class="contact__intro reveal">
+        <h2>Check your address</h2>
+        <p>Tell us where you are and what you need, and we will confirm coverage and call you back.</p>
+        <a class="contact__phone" href={`tel:${site.phone.tel}`}><Icon name="phone" size={20} /> {site.phone.display}</a>
+      </div>
+      <div class="reveal d1"><QuoteForm id="areas-quote" /></div>
+    </div>
+  </section>
+
+</Base>

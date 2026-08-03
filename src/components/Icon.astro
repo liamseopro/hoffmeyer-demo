@@ -1,0 +1,29 @@
+---
+// Inline SVG icon set, no library. Stroke-based 24x24 unless noted.
+interface Props { name: string; size?: number; }
+const { name, size = 20 } = Astro.props;
+const s = size;
+// Stroke icons (fill none)
+const stroke = ['phone','mapPin','clock','check','shield','send','menu','arrowRight','chevronDown','users','sun','flame','snowflake','droplet','bolt','leaf','award','star'];
+const isStroke = stroke.includes(name);
+---
+<svg width={s} height={s} viewBox="0 0 24 24" fill={isStroke ? 'none' : 'currentColor'} stroke={isStroke ? 'currentColor' : 'none'} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  {name === 'phone' && <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .7-.2 1l-2.3 2.2z"/>}
+  {name === 'mapPin' && <><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></>}
+  {name === 'clock' && <><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></>}
+  {name === 'check' && <path d="M5 12.5 10 17.5 19.5 7"/>}
+  {name === 'shield' && <path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6l-7-3z"/>}
+  {name === 'send' && <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/>}
+  {name === 'menu' && <><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></>}
+  {name === 'arrowRight' && <><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></>}
+  {name === 'chevronDown' && <path d="M6 9l6 6 6-6"/>}
+  {name === 'users' && <><path d="M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1"/><circle cx="9" cy="8" r="3.5"/><path d="M22 19v-1a4 4 0 0 0-3-3.8"/><path d="M16 4.2a4 4 0 0 1 0 7.6"/></>}
+  {name === 'sun' && <><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></>}
+  {name === 'flame' && <path d="M12 2c1 3 4 4.5 4 8a4 4 0 0 1-8 0c0-1 .3-1.8.8-2.5C9 9 9 8 9 7c1 .5 2 1.5 3-5z"/>}
+  {name === 'snowflake' && <><path d="M12 2v20M2 12h20M5 5l14 14M19 5 5 19"/></>}
+  {name === 'droplet' && <path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>}
+  {name === 'bolt' && <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/>}
+  {name === 'leaf' && <><path d="M5 21c0-9 6-15 16-15 0 10-6 16-15 16-1 0-1-1-1-1z"/><path d="M5 21c4-4 8-6 12-7"/></>}
+  {name === 'award' && <><circle cx="12" cy="9" r="6"/><path d="M9 14.5 8 22l4-2 4 2-1-7.5"/></>}
+  {name === 'star' && <path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17.9 6.6 20l1-6.1L3.2 9.5l6.1-.9L12 3z"/>}
+</svg>

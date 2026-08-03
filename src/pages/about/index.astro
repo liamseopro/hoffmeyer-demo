@@ -1,0 +1,107 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { site } from '../../data/site';
+import { generations } from '../../data/content';
+
+const title = `About | ${site.name}`;
+const description = `${site.name} is a family-run plumbing, heating, and cooling contractor in Goderich, Ontario, founded May 2, 1958. Three generations of the Hoffmeyer family, now part of the Jayden's Mechanical family.`;
+const years = new Date().getFullYear() - site.est;
+
+const breadcrumb = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'About', item: `${site.url}/about/` },
+  ],
+});
+---
+<Base title={title} description={description} path="/about/" active="about" schemaBlocks={[breadcrumb]}>
+
+  <section class="section bg-espresso" style="padding-top:clamp(48px,6vw,72px)">
+    <div class="container">
+      <span class="eyebrow on-dark">Our story</span>
+      <h1>Three generations of plumbing and heating in Goderich</h1>
+      <p class="lede" style="color:var(--on-espresso-soft);max-width:64ch">{site.legalName} has worked out of {site.address.street} in Goderich since the 1960s. Founded in {site.est}, family-run across three generations, and now part of the {site.partner.name} family.</p>
+    </div>
+  </section>
+
+  <section class="section intro">
+    <div class="container intro__grid">
+      <div class="intro__meta reveal">
+        <span class="intro__year">{site.est}<span>Founded May 2, {site.est}</span></span>
+      </div>
+      <div class="intro__body reveal d1">
+        <p class="intro__lede">Started as <strong>Near &amp; Hoffmeyer</strong>, built by one family.</p>
+        <p>{site.legalName} was founded on May 2, {site.est}, by Len Near and Jack Hoffmeyer as <strong>Near &amp; Hoffmeyer</strong>, working out of 59 Hamilton St in Goderich. In the early 1960s Jack bought out his partner, changed the name, and moved the shop to Kingston Street, where it has been ever since.</p>
+        <p>An Appliance Sales &amp; Service division was added at 58 Kingston St in 1971 and ran for forty years. The business grew on plumbing, heating, and cooling work across Goderich and Huron County, and on the showroom and the dealer relationships that let a small shop carry the brands a big one would.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-espresso">
+    <div class="container story__grid">
+      <div class="story__lead reveal">
+        <span class="eyebrow on-dark">The Hoffmeyer line</span>
+        <h2>Three generations, one name</h2>
+        <p class="story__sub">From the founder to the crew today, here is how the business passed down through one Goderich family.</p>
+      </div>
+      <div class="story__body reveal d1">
+        <div class="timeline">
+          {generations.map((g) => (
+            <div class="timeline__item">
+              <span class="timeline__node" aria-hidden="true"></span>
+              <span class="timeline__date">{g.date}</span>
+              <p class="timeline__body" set:html={g.body}></p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container story__grid">
+      <div class="story__lead reveal">
+        <span class="eyebrow">The building on Kingston Street</span>
+        <h2>A shop with its own history</h2>
+      </div>
+      <div class="story__body reveal d1" style="color:var(--ink-soft)">
+        <p>The building at 55 Kingston St was not always a plumbing shop. A memory wall inside traces it back to the <strong>Royal Hotel, built in 1895</strong>, and then to the Goderich Bottling Works in the 1950s, before it became the Hoffmeyer home base.</p>
+        <p>On August 21, 2011, an F3 tornado struck Goderich and badly damaged the building. The shop kept running, relocated for about eighteen months to 317 Huron Rd with help from Pete and Frank Strickland and Goderich Toyota, before the work came home to Kingston Street. Resilience like that is part of why the shop has lasted {years} years.</p>
+        <div class="story__pull" style="border-left-color:var(--cobalt);background:var(--cobalt-tint)"><Icon name="mapPin" size={18} /><span style="color:var(--espresso)">Royal Hotel, 1895. Goderich Bottling Works, 1950s. Hoffmeyer, since the 1960s.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="story">
+    <div class="container story__grid">
+      <div class="story__lead reveal">
+        <span class="eyebrow on-dark">The {site.partner.acquiredYear} chapter</span>
+        <h2>Part of the Jayden's Mechanical family</h2>
+      </div>
+      <div class="story__body reveal d1">
+        <p>In {site.partner.acquiredYear}, {site.shortName} joined the {site.partner.name} family as its Goderich branch, carrying a sixty-plus-year legacy into a wider Southwestern Ontario group. The Hoffmeyer name, the Kingston Street location, and the crews all stayed, now backed by more depth for parts, peak demand, and emergency coverage.</p>
+        <div class="story__pull"><Icon name="shield" size={18} /><span>The same family shop. The same standard. The backing of a larger group.</span></div>
+        <p>For customers who have called us for {years} years, almost nothing changes day to day except the resources behind the work. For new customers, you get a Goderich institution with the reach of a larger group behind it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container pillar-detail__wrap">
+      <div class="shead"><span class="eyebrow">What stays the same</span><h2>The Kingston Street shop, the crews, the 24-hour line</h2></div>
+      <div class="loc-svc__list" style="max-width:none">
+        <li style="border-bottom:1px solid var(--line)"><Icon name="mapPin" size={18} /> <span><b>The Goderich shop.</b> {site.address.street}. Same location since the 1960s.</span></li>
+        <li style="border-bottom:1px solid var(--line)"><Icon name="phone" size={18} /> <span><b>The phones.</b> Office {site.phone.display}, with a 24-hour emergency line for after hours.</span></li>
+        <li style="border-bottom:1px solid var(--line)"><Icon name="users" size={18} /> <span><b>The crews.</b> Licensed plumbers and gas-certified HVAC technicians who know Huron County homes.</span></li>
+        <li style="border-bottom:1px solid var(--line)"><Icon name="shield" size={18} /> <span><b>The standard.</b> Permits and inspection on the work that requires it, every time.</span></li>
+      </div>
+      <div style="margin-top:30px">
+        <a class="btn btn-primary btn-lg" href="/contact/"><Icon name="send" size={19} /> Get in touch</a>
+        <a class="btn btn-outline btn-lg" href="/plumbing/" style="margin-left:10px"><Icon name="droplet" size={19} /> Our services</a>
+      </div>
+    </div>
+  </section>
+
+</Base>

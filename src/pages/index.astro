@@ -1,0 +1,263 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { site } from '../data/site';
+import { pillars, faqs, generations } from '../data/content';
+
+const title = `${site.name} | Plumber & HVAC in Goderich & Huron County`;
+const description = `${site.name} is a plumbing, heating, cooling, and gas contractor in Goderich, Ontario, serving Huron County since 1958. Three generations. Drain and sewer work, furnaces, boilers, AC, water heaters, fireplaces, and 24-hour emergency service. Now part of the Jayden's Mechanical family.`;
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+});
+
+const plumb = pillars.find((p) => p.slug === 'plumbing')!;
+const brands = ['Bradford White', 'A.O. Smith', 'Rheem', 'Giant', 'Noritz', 'BAXI', 'Weil-McLain', 'Slant/Fin', 'KeepRite', 'Carrier', 'Uponor', 'Rehau', 'Heat Link', 'Lifebreath', 'VanEE', 'Moen', 'Delta', 'TOTO'];
+
+const steps = [
+  { n: '01', h: 'Tell us the job', p: 'Describe the work over the phone or the form. A drain, a furnace, a water heater, a gas line. We will tell you honestly what it takes.' },
+  { n: '02', h: 'Clear quote', p: 'You get a clear quote with the scope and the permit and inspection factored in, and rental or finance options if you want them.' },
+  { n: '03', h: 'Scheduled work', p: 'Licensed plumbers and gas-certified technicians do the work to code, around your schedule where we can, and arrange the inspection.' },
+  { n: '04', h: 'There when it matters', p: 'For a flood, a no-heat call, or a gas smell, the 24-hour emergency line gets a technician out fast across Huron County.' },
+];
+---
+
+<Base title={title} description={description} path="/" active="home" schemaBlocks={[faqSchema]}>
+
+  {/* HERO */}
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <span class="eyebrow on-dark">Goderich &amp; Huron County since 1958</span>
+        <h1>Plumbing, heating, and cooling for <em>Huron County homes and businesses</em></h1>
+        <p class="hero__sub">
+          {site.name} is a plumbing, heating, cooling, and gas contractor at {site.address.street} in {site.address.locality},
+          serving the region since 1958. Three generations, one shop, with 24-hour emergency service, now backed by the wider
+          {site.partner.name} family.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn-primary btn-lg" href="/contact/"><Icon name="send" size={19} /> Request a Quote</a>
+          <a class="btn btn-cobalt-line btn-lg" href={`tel:${site.phone.tel}`}><Icon name="phone" size={19} /> {site.phone.display}</a>
+        </div>
+        <div class="hero__proof">
+          <span><Icon name="shield" size={16} /> Licensed &amp; insured</span>
+          <span><Icon name="clock" size={16} /> 24-hour emergency</span>
+          <span><Icon name="flame" size={16} /> Gas-certified (NG &amp; LP)</span>
+        </div>
+      </div>
+      <div class="hero__media reveal d1">
+        <figure>
+          <img src="/assets/img/hero.jpg" alt="Hoffmeyer plumber and HVAC technician at work on residential pipes and equipment in Huron County" width="900" height="675" loading="eager" fetchpriority="high" />
+        </figure>
+        <div class="hero__badge">
+          <b>1958</b>
+          <small>Family-run since</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* STATS */}
+  <section class="stats">
+    <div class="container">
+      <div class="stats__grid">
+        {site.stats.map((s) => (
+          <div class="stats__item reveal"><b>{s.value}</b><span>{s.label}</span></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* INTRO */}
+  <section class="intro" id="about">
+    <div class="container intro__grid">
+      <div class="intro__meta reveal">
+        <span class="intro__year">{site.est}<span>Family-run in Goderich</span></span>
+      </div>
+      <div class="intro__body reveal d1">
+        <p class="intro__lede">Three generations of the Hoffmeyer family, <strong>one shop on Kingston Street</strong>, since 1958.</p>
+        <p>
+          <strong>{site.legalName}</strong> was founded on May 2, 1958, and built by three generations of the Hoffmeyer family
+          into the plumbing, heating, and cooling contractor Goderich and Huron County call. From a backed-up drain to a new
+          furnace, a tankless water heater, or a gas fireplace, the work is done by licensed plumbers and gas-certified
+          technicians who live in the community they serve.
+        </p>
+        <p>
+          In {site.partner.acquiredYear} the company joined the {site.partner.name} family. The Hoffmeyer name, the Kingston
+          Street location, and the crews all continue, now backed by a wider Southwestern Ontario group for parts, crews, and depth.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* SERVICES */}
+  <section class="section pillars" id="services">
+    <div class="container">
+      <div class="pillars__head reveal">
+        <span class="eyebrow">What we do</span>
+        <h2>Plumbing, heating, cooling, and gas, under one roof</h2>
+        <p class="lede">From the drain in your basement to the furnace in your utility room and the fireplace in your living room, one licensed crew handles the mechanicals Huron County homes and businesses run on.</p>
+      </div>
+      <div class="pillars__grid">
+        {pillars.map((p, i) => (
+          <a class="pillar-card reveal" href={`/${p.slug}/`} style={`--d:${i*60}ms`}>
+            <div class="pillar-card__media">
+              <img src={p.image} alt={p.imageAlt} loading="lazy" width="600" height="400" />
+              {p.flagship && <span class="pillar-card__flag">Namesake trade</span>}
+            </div>
+            <div class="pillar-card__body">
+              <h3>{p.name}</h3>
+              <p>{p.short}</p>
+              <span class="pillar-card__link">Explore {p.nav} <Icon name="arrowRight" size={15} /></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* THE THREE GENERATIONS - pipe-run timeline (signature) */}
+  <section class="section bg-espresso">
+    <div class="container story__grid">
+      <div class="story__lead reveal">
+        <span class="eyebrow on-dark">Since 1958</span>
+        <h2>Three generations, one shop</h2>
+        <p class="story__sub">The Hoffmeyer name has been on Kingston Street for more than sixty years. Here is how a plumbing shop founded in 1958 became the Huron County contractor it is today.</p>
+      </div>
+      <div class="story__body reveal d1">
+        <div class="timeline">
+          {generations.map((g) => (
+            <div class="timeline__item">
+              <span class="timeline__node" aria-hidden="true"></span>
+              <span class="timeline__date">{g.date}</span>
+              <p class="timeline__body" set:html={g.body}></p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* BRANDS STRIP */}
+  <section class="section brands-strip bg-sand-2">
+    <div class="container">
+      <div class="shead center reveal">
+        <span class="eyebrow">Equipment we carry</span>
+        <h2>Trusted brands, stocked and serviced</h2>
+        <p class="lede">A selection of the manufacturers we have carried and serviced for decades. The full list is longer.</p>
+      </div>
+      <div class="brands-strip__grid">
+        {brands.map((b) => <div class="brands-strip__cell">{b}</div>)}
+      </div>
+    </div>
+  </section>
+
+  {/* PLUMBING FLAGSHIP highlight */}
+  <section class="section">
+    <div class="container story__grid">
+      <div class="story__lead reveal">
+        <span class="eyebrow"><Icon name="droplet" size={15} /> The namesake trade</span>
+        <h2>{plumb.h2}</h2>
+        <p class="lede" style="color:var(--ink-soft)">{plumb.lede}</p>
+        <div class="hero__cta" style="margin-top:24px">
+          <a class="btn btn-primary btn-lg" href="/plumbing/"><Icon name="droplet" size={19} /> Explore plumbing</a>
+        </div>
+      </div>
+      <div class="story__body reveal d1" style="color:var(--ink-soft)">
+        <p>Plumbing is where the shop started, and it is still the backbone of the work. <strong>Drain and sewer cleaning</strong>, water heaters, repipes, fixtures, and new-construction rough-ins, with the jetting and camera equipment to diagnose underground problems without guessing.</p>
+        <div class="story__pull" style="border-left-color:var(--cobalt);background:var(--cobalt-tint)"><Icon name="check" size={18} /><span style="color:var(--espresso)">From a midnight backup to a full reno rough-in, no job too big or too small.</span></div>
+        <p>The same crew that clears your drain can replace your water heater, repipe your home, and service the furnace and AC. One licensed shop, one point of accountability, three generations of doing it.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* HOW WE WORK */}
+  <section class="section bg-sand-2">
+    <div class="container">
+      <div class="shead center reveal">
+        <span class="eyebrow">How we work</span>
+        <h2>From first call to the work done right</h2>
+      </div>
+      <div class="awards__grid">
+        {steps.map((s) => (
+          <div class="award reveal">
+            <b class="step-n">{s.n}</b>
+            <b class="t">{s.h}</b>
+            <span>{s.p}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* FINANCING TEASER */}
+  <section class="section">
+    <div class="container story__grid">
+      <div class="story__lead reveal">
+        <span class="eyebrow">Vista Credit</span>
+        <h2>Rent or finance the equipment, your way</h2>
+        <p class="lede" style="color:var(--ink-soft)">Through our Vista Credit program we offer rental and finance options on water heaters, furnaces, air conditioners, and boilers, with no-charge installation and monthly pre-authorized payment.</p>
+        <div class="hero__cta" style="margin-top:24px">
+          <a class="btn btn-outline btn-lg" href="/financing/"><Icon name="arrowRight" size={19} /> Financing &amp; rentals</a>
+        </div>
+      </div>
+      <div class="story__body reveal d1" style="color:var(--ink-soft)">
+        <p>Not every job needs to be paid up front. Vista Credit covers the equipment most households replace over time, with rate-increase protection and the option for new equipment on a set cycle.</p>
+        <div class="story__pull" style="border-left-color:var(--cobalt);background:var(--cobalt-tint)"><Icon name="check" size={18} /><span style="color:var(--espresso)">Water heaters, furnaces, air conditioners, and boilers.</span></div>
+        <p>We will walk you through the rental and the purchase numbers honestly so you can pick what works for your budget.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* ACQUISITION STORY */}
+  <section class="story" id="story">
+    <div class="container story__grid">
+      <div class="story__lead reveal">
+        <span class="eyebrow on-dark">A new chapter</span>
+        <h2>The same Goderich shop,<br />a wider family behind it.</h2>
+        <p class="story__sub">In {site.partner.acquiredYear}, {site.shortName} joined the {site.partner.name} family. Here is what that means for the customers who have called us for decades.</p>
+      </div>
+      <div class="story__body reveal d1">
+        <p>For you, almost nothing changes day to day. The Hoffmeyer name stays. The Kingston Street location stays. The plumbers and technicians who know Huron County homes stay. What is new is the backing: a larger Southwestern Ontario group means more crew for peak and emergency calls, more depth behind the work, and access to a wider range of equipment.</p>
+        <div class="story__pull"><Icon name="shield" size={18} /><span>The same shop. The same standard. More depth behind it.</span></div>
+        <p>If you have called us before, your experience carries on unchanged. If you are new to Hoffmeyer, you get a sixty-plus-year Goderich contractor with the reach of a larger group.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+  <section class="section faq-section">
+    <div class="container">
+      <div class="shead center">
+        <span class="eyebrow">Questions</span>
+        <h2>What Huron County asks us</h2>
+      </div>
+      <div class="faq">
+        {faqs.map(([q, a]) => (
+          <details class="faq__item"><summary>{q}</summary><div class="faq__answer">{a}</div></details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* CONTACT */}
+  <section class="section contact" id="contact">
+    <div class="container contact__grid">
+      <div class="contact__intro reveal">
+        <h2>Tell us about the job</h2>
+        <p>From a drain to a new furnace to a 24-hour emergency, send a few details and we will call you back, usually within the hour during office hours.</p>
+        <a class="contact__phone" href={`tel:${site.phone.tel}`}><Icon name="phone" size={20} /> {site.phone.display}</a>
+        <p class="contact__hours"><b>Office</b><br />{site.hours.weekdays}<br />{site.hours.saturday}<br /><b>Emergency line</b><br /><a href={`tel:${site.phoneEmergency.tel}`} style="font-weight:600">{site.phoneEmergency.display}</a> &middot; {site.hours.emergency}</p>
+        <div class="contact__proof">
+          <span><Icon name="check" size={16} /> Licensed plumbing, heating &amp; cooling contractor</span>
+          <span><Icon name="check" size={16} /> Gas-certified (NG &amp; LP)</span>
+          <span><Icon name="check" size={16} /> Permit &amp; inspection handled</span>
+        </div>
+      </div>
+      <div class="reveal d1"><QuoteForm id="home-quote" /></div>
+    </div>
+  </section>
+
+</Base>

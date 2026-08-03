@@ -1,0 +1,24 @@
+---
+import PillarLayout from '../../layouts/PillarLayout.astro';
+import Icon from '../../components/Icon.astro';
+---
+<PillarLayout slug="plumbing">
+
+  <section class="section bg-sand-2" style="padding:clamp(40px,5vw,64px) 0">
+    <div class="container pillar-detail__wrap">
+      <span class="eyebrow"><Icon name="droplet" size={15} /> Built for Huron County homes</span>
+      <h2>Underground problems, diagnosed before we dig</h2>
+      <div class="pillar-detail__body">
+        <p>A recurring backup or a slow drain usually points to something underground, and the old answer was to dig until you found it. We use high-pressure water jetting to clear the line and video camera inspection to see inside it, so the diagnosis is exact before any yard gets opened up.</p>
+        <p>When the line does need repair or replacement, we handle the water main and sewer line work, the permits, and the inspection, and we leave the area restored. For a corroded water supply line or a fixture that has given up, the fix is usually faster than people expect.</p>
+      </div>
+      <ul class="pillar-detail__bullets" style="background:var(--sand)">
+        <li><Icon name="check" size={16} /> High-pressure jetting clears grease, roots, and scale</li>
+        <li><Icon name="check" size={16} /> Camera inspection locates the exact problem</li>
+        <li><Icon name="check" size={16} /> Sewer line, water main, and supply line repair</li>
+        <li><Icon name="check" size={16} /> Permits and inspection handled</li>
+      </ul>
+    </div>
+  </section>
+
+</PillarLayout>

@@ -1,0 +1,114 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+import { pillars, LOCATIONS } from '../data/content';
+
+const { active = '' }: { active?: string } = Astro.props;
+const svcActive = pillars.some((p) => p.slug === active);
+const areasActive = LOCATIONS.some((l) => l.slug === active);
+---
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="familybar">
+  <div class="container familybar__row">
+    <a class="familybar__chip" href={site.partner.url} target="_blank" rel="noopener" aria-label="Jayden's Mechanical (opens in a new tab)">
+      <img src="/assets/img/jaydens-mechanical.png" alt="Jayden's Mechanical" width="452" height="76" loading="eager" decoding="async" />
+    </a>
+    <p>
+      Proudly part of Jayden's Mechanical's Family of Brands.
+      <a href={site.partner.url} target="_blank" rel="noopener">Learn more</a>
+    </p>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="container header__inner">
+    <a class="brand" href="/" aria-label={`${site.shortName} home`}>
+      <img class="brand__logo" src="/assets/img/hoffmeyer-logo.png" alt="Hoffmeyer Plumbing & Heating" width="187" height="46" loading="eager" decoding="async" />
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="/" aria-current={active === 'home' ? 'page' : undefined}>Home</a>
+
+      <div class="dd" data-dd>
+        <button class="dd__toggle" type="button" aria-expanded="false" aria-controls="svc-menu" data-current={svcActive ? 'true' : undefined}>
+          Services <Icon name="chevronDown" size={14} />
+        </button>
+        <ul class="dd__menu" id="svc-menu">
+          {pillars.map((p) => (
+            <li><a href={`/${p.slug}/`} aria-current={active === p.slug ? 'page' : undefined}>{p.name}</a></li>
+          ))}
+          <li><a href="/financing/">Financing &amp; Rentals</a></li>
+          <li class="dd__all"><a href="/#services">All services</a></li>
+        </ul>
+      </div>
+
+      <div class="dd" data-dd>
+        <button class="dd__toggle" type="button" aria-expanded="false" aria-controls="areas-menu" data-current={areasActive ? 'true' : undefined}>
+          Service Areas <Icon name="chevronDown" size={14} />
+        </button>
+        <ul class="dd__menu" id="areas-menu">
+          {LOCATIONS.map((l) => (
+            <li><a href={`/locations/${l.slug}/`} aria-current={active === l.slug ? 'page' : undefined}>{l.name}</a></li>
+          ))}
+          <li class="dd__all"><a href="/service-areas/">All towns we serve</a></li>
+        </ul>
+      </div>
+
+      <a href="/about/" aria-current={active === 'about' ? 'page' : undefined}>About</a>
+      <a href="/contact/" aria-current={active === 'contact' ? 'page' : undefined}>Contact</a>
+      <a class="btn btn-primary nav__cta" href="/contact/"><Icon name="phone" size={17} /> Get a Quote</a>
+    </nav>
+
+    <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><Icon name="menu" /></button>
+  </div>
+</header>
+
+<script>
+  // Header: mobile toggle + scroll shadow + click-to-open dropdowns (no hover,
+  // which fights touch and the click handler). Keyboard + outside-click close.
+  const header = document.getElementById('header');
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+  toggle?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+    nav.classList.remove('open');
+    toggle?.setAttribute('aria-expanded', 'false');
+  }));
+  const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const isMobile = () => window.matchMedia('(max-width: 980px)').matches;
+  header?.querySelectorAll('.dd').forEach((dd) => {
+    const btn = dd.querySelector('[data-dd-toggle], .dd__toggle') as HTMLElement | null;
+    const menu = dd.querySelector('.dd__menu') as HTMLElement | null;
+    if (!btn || !menu) return;
+    const set = (open: boolean) => {
+      btn.setAttribute('aria-expanded', String(open));
+      if (open) menu.setAttribute('data-open', ''); else menu.removeAttribute('data-open');
+    };
+    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    dd.addEventListener('focusout', (e) => {
+      if (!isMobile() && e.relatedTarget && !dd.contains(e.relatedTarget as Node)) set(false);
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (!header?.contains(e.target as Node)) {
+      nav?.classList.remove('open');
+      toggle?.setAttribute('aria-expanded', 'false');
+      header?.querySelectorAll('.dd__menu').forEach((m) => m.removeAttribute('data-open'));
+      header?.querySelectorAll('.dd__toggle').forEach((b) => b.setAttribute('aria-expanded', 'false'));
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    nav?.classList.remove('open');
+    toggle?.setAttribute('aria-expanded', 'false');
+    header?.querySelectorAll('.dd__menu').forEach((m) => m.removeAttribute('data-open'));
+    header?.querySelectorAll('.dd__toggle').forEach((b) => b.setAttribute('aria-expanded', 'false'));
+  });
+</script>
