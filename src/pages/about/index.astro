@@ -6,7 +6,6 @@ import { generations } from '../../data/content';
 
 const title = `About | ${site.name}`;
 const description = `${site.name} is a family-run plumbing, heating, and cooling contractor in Goderich, Ontario, founded May 2, 1958. Three generations of the Hoffmeyer family, now part of the Jayden's Mechanical family.`;
-const years = new Date().getFullYear() - site.est;
 
 const breadcrumb = JSON.stringify({
   '@context': 'https://schema.org', '@type': 'BreadcrumbList',
@@ -68,7 +67,7 @@ const breadcrumb = JSON.stringify({
       </div>
       <div class="story__body reveal d1" style="color:var(--ink-soft)">
         <p>The building at 55 Kingston St was not always a plumbing shop. A memory wall inside traces it back to the <strong>Royal Hotel, built in 1895</strong>, and then to the Goderich Bottling Works in the 1950s, before it became the Hoffmeyer home base.</p>
-        <p>On August 21, 2011, an F3 tornado struck Goderich and badly damaged the building. The shop kept running, relocated for about eighteen months to 317 Huron Rd with help from Pete and Frank Strickland and Goderich Toyota, before the work came home to Kingston Street. Resilience like that is part of why the shop has lasted {years} years.</p>
+        <p>On August 21, 2011, a tornado struck Goderich and badly damaged the building. The shop kept running, relocated for about eighteen months to 317 Huron Rd with help from Pete and Frank Strickland and Goderich Toyota, before the work came home to Kingston Street. Carrying on through that is part of why the shop is still here.</p>
         <div class="story__pull" style="border-left-color:var(--cobalt);background:var(--cobalt-tint)"><Icon name="mapPin" size={18} /><span style="color:var(--espresso)">Royal Hotel, 1895. Goderich Bottling Works, 1950s. Hoffmeyer, since the 1960s.</span></div>
       </div>
     </div>
@@ -83,7 +82,7 @@ const breadcrumb = JSON.stringify({
       <div class="story__body reveal d1">
         <p>In {site.partner.acquiredYear}, {site.shortName} joined the {site.partner.name} family as its Goderich branch, carrying a sixty-plus-year legacy into a wider Southwestern Ontario group. The Hoffmeyer name, the Kingston Street location, and the crews all stayed, now backed by more depth for parts, peak demand, and emergency coverage.</p>
         <div class="story__pull"><Icon name="shield" size={18} /><span>The same family shop. The same standard. The backing of a larger group.</span></div>
-        <p>For customers who have called us for {years} years, almost nothing changes day to day except the resources behind the work. For new customers, you get a Goderich institution with the reach of a larger group behind it.</p>
+        <p>For customers who have called us over the years, almost nothing changes day to day except the resources behind the work. For new customers, you get a Goderich institution with the reach of a larger group behind it.</p>
       </div>
     </div>
   </section>

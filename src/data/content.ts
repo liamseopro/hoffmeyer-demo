@@ -63,7 +63,7 @@ export const pillars: ServiceScope[] = [
     bullets: [
       'Furnace installation, repair, and 24-hour response',
       'Boilers (Weil-McLain, Slant/Fin, BAXI)',
-      'Heat pumps and hybrid systems',
+      'Heat pumps',
       'Air handlers, unit heaters, and make-up air units',
       'Humidifiers, dehumidifiers, and HRVs',
       'Gas-certified for natural gas and liquid propane',
@@ -189,7 +189,7 @@ export const LOCATIONS: Location[] = [
     name: 'Clinton',
     county: 'Huron County',
     blurb:
-      'About twenty minutes north of Goderich, Clinton is a town we have served for decades. Residential plumbing and heating calls, furnace replacements, and water-heater work keep our crews on the road there year-round.',
+      'About twenty minutes north of Goderich, Clinton is a town we serve from our Kingston Street shop. Residential plumbing and heating calls, furnace replacements, and water-heater work keep our crews on the road there year-round.',
   },
   {
     slug: 'bayfield',
@@ -210,7 +210,7 @@ export const LOCATIONS: Location[] = [
     name: 'Blyth',
     county: 'Huron County',
     blurb:
-      'East of Goderich, Blyth is a small Huron County community we reach on a regular route. Rural residential and farm-adjacent properties there rely on us for drain and sewer work, water heaters, and heating service.',
+      'East of Goderich, Blyth is a small Huron County community we serve from our Goderich shop. Rural residential and farm-adjacent properties there call on us for drain and sewer work, water heaters, and heating service.',
   },
 ];
 
@@ -220,12 +220,6 @@ export const AREAS = [
   'Bayfield',
   'Seaforth',
   'Blyth',
-  'Auburn',
-  'Holmesville',
-  'Vanastra',
-  'Port Albert',
-  'Hensall',
-  'Zurich',
   'Huron County',
 ];
 

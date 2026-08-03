@@ -63,12 +63,6 @@ export const site = {
     'Bayfield',
     'Seaforth',
     'Blyth',
-    'Auburn',
-    'Holmesville',
-    'Vanastra',
-    'Port Albert',
-    'Hensall',
-    'Zurich',
     'Huron County',
   ],
   partner: {
