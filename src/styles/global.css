@@ -35,6 +35,7 @@
   --cobalt-hi: #7ba2ef;       /* bright cobalt for dark-espresso surfaces (~5.7:1 on espresso) */
   --cobalt-tint: #e4ecf9;     /* pale cobalt-tinted band (nav hovers) */
   --line: #d9ccb2;            /* warm hairline */
+  --field-line: #8f7553;      /* WCAG 1.4.11 form-field boundary (3.6:1 on sand) */
   --white: #ffffff;
   /* text colours on dark espresso surfaces */
   --on-espresso: #efe6d2;     /* warm parchment text on dark */
@@ -339,7 +340,7 @@ section[id], article[id] { scroll-margin-top: 90px; }
 .qcard__sub { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 18px; }
 .field { margin-bottom: 14px; }
 .field label { display: block; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
-.field input, .field select, .field textarea { width: 100%; padding: 12px 14px; font-family: var(--font-body); font-size: 1rem; color: var(--ink); background: var(--sand); border: 1.5px solid var(--line); border-radius: var(--radius-sm); transition: border-color var(--dur), box-shadow var(--dur); }
+.field input, .field select, .field textarea { width: 100%; padding: 12px 14px; font-family: var(--font-body); font-size: 1rem; color: var(--ink); background: var(--sand); border: 1.5px solid var(--field-line); border-radius: var(--radius-sm); transition: border-color var(--dur), box-shadow var(--dur); }
 .field textarea { resize: vertical; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--cobalt); box-shadow: 0 0 0 3px rgba(29,93,191,0.15); background: var(--white); }
 .qcard .btn { width: 100%; margin-top: 6px; }
