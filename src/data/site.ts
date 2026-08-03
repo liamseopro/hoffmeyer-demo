@@ -28,11 +28,10 @@ export const site = {
   tagline: 'Plumbing, heating, cooling, and gas across Huron County',
   heritageBadge: 'Sales | Service | Showroom', // VERIFIED tagline under the logo on every archived page.
   // VERIFIED from the archive + directory listings.
-  phone: { display: '(519) 524-7861', tel: '+15195247861' }, // main office line.
-  phoneEmergency: { display: '(519) 524-4111', tel: '+15195244111' }, // 24-hour emergency line.
-  phoneFax: { display: '(519) 524-1252' }, // VERIFIED fax line (no tel: — not dialable).
-  // TODO(confirm with Jayden's): archive email + a brand-domain address both look stale post-acquisition.
-  email: 'info@hoffmeyerplumbing.com',
+  phone: { display: '(519) 237-4328', tel: '+15192374328' }, // Jayden's 24/7 dispatch (verified jaydensmechanical.com); old 519-524-7861 dead post-acquisition.
+  phoneEmergency: { display: '(519) 237-4328', tel: '+15192374328' }, // same number - Jayden's routes 24/7 through one line; old 519-524-4111 is gone.
+  // VERIFIED via jaydensmechanical.com (old hoffmeyerplumbing.com mailbox dead - domain NXDOMAIN).
+  email: 'info@jaydensmechanical.com',
   address: {
     street: '55 Kingston St',
     locality: 'Goderich',

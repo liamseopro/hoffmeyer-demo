@@ -210,7 +210,7 @@ export const LOCATIONS: Location[] = [
     name: 'Blyth',
     county: 'Huron County',
     blurb:
-      'East of Goderich, Blyth is a small Huron County community we serve from our Goderich shop. Rural residential and farm-adjacent properties there call on us for drain and sewer work, water heaters, and heating service.',
+      'East of Goderich, Blyth is a small Huron County community we cover from our Goderich shop on request. Rural residential and farm-adjacent properties there call on us for drain and sewer work, water heaters, and heating service. Call to confirm we reach your address.',
   },
 ];
 
