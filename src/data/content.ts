@@ -238,7 +238,7 @@ export const generations: { date: string; body: string }[] = [
 export const faqs: [string, string][] = [
   [
     'Are you licensed and insured?',
-    'Yes, we are a licensed and insured plumbing, heating, and cooling contractor. (Exact licence and registration numbers and the gas-fitter certification details are to be confirmed and displayed before launch.) We pull permits and arrange inspection on the work that requires it, every time.',
+    'Yes, we are a licensed and insured plumbing, heating, and cooling contractor. We pull permits and arrange inspection on the work that requires it, every time.',
   ],
   [
     'Do you offer 24-hour emergency service?',
@@ -254,7 +254,7 @@ export const faqs: [string, string][] = [
   ],
   [
     'What areas do you serve?',
-    'We are based at 55 Kingston St in Goderich and serve Goderich and the surrounding Huron County communities, including Clinton, Bayfield, Seaforth, Blyth, Auburn, Holmesville, Vanastra, Port Albert, Hensall, and Zurich. If you are unsure whether we cover your address, call us and we will confirm.',
+    'We are based at 55 Kingston St in Goderich and serve Goderich and the surrounding Huron County communities, including Clinton, Bayfield, Seaforth, and Blyth. If you are unsure whether we cover your address, call us and we will confirm.',
   ],
   [
     'Are you still the same Hoffmeyer from Goderich?',

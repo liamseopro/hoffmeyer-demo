@@ -33,6 +33,7 @@ const localBusinessSchema = {
   foundingDate: String(site.est),
   url: site.url,
   telephone: site.phone.tel,
+  faxNumber: site.phoneFax.display,
   email: site.email,
   image: og,
   logo: `${site.url}/assets/img/hoffmeyer-logo.png`,
@@ -48,7 +49,7 @@ const localBusinessSchema = {
     addressCountry: 'CA',
   },
   geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
-  areaServed: site.serviceAreas.map((a) => ({ '@type': 'City', name: a })),
+  areaServed: site.serviceAreas.map((a) => ({ '@type': a.endsWith('County') ? 'AdministrativeArea' : 'City', name: a })),
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
@@ -91,7 +92,8 @@ const allSchemas = [JSON.stringify(localBusinessSchema), ...schemaBlocks]
 <meta name="twitter:description" content={description}>
 <meta name="twitter:image" content={og}>
 <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
-<link rel="apple-touch-icon" href="/assets/img/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
 <Fragment set:html={allSchemas} />
 </head>
 <body>

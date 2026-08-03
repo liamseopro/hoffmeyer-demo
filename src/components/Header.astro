@@ -73,6 +73,7 @@ const areasActive = LOCATIONS.some((l) => l.slug === active);
   toggle?.addEventListener('click', () => {
     const open = nav?.classList.toggle('open');
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   });
   nav?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
     nav.classList.remove('open');
@@ -93,7 +94,8 @@ const areasActive = LOCATIONS.some((l) => l.slug === active);
     };
     btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
     dd.addEventListener('focusout', (e) => {
-      if (!isMobile() && e.relatedTarget && !dd.contains(e.relatedTarget as Node)) set(false);
+      const rt = (e as FocusEvent).relatedTarget as Node | null;
+      if (!isMobile() && rt && !dd.contains(rt)) set(false);
     });
   });
   document.addEventListener('click', (e) => {

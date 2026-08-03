@@ -30,6 +30,7 @@ export const site = {
   // VERIFIED from the archive + directory listings.
   phone: { display: '(519) 524-7861', tel: '+15195247861' }, // main office line.
   phoneEmergency: { display: '(519) 524-4111', tel: '+15195244111' }, // 24-hour emergency line.
+  phoneFax: { display: '(519) 524-1252' }, // VERIFIED fax line (no tel: — not dialable).
   // TODO(confirm with Jayden's): archive email + a brand-domain address both look stale post-acquisition.
   email: 'info@hoffmeyerplumbing.com',
   address: {

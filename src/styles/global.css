@@ -150,7 +150,7 @@ section[id], article[id] { scroll-margin-top: 90px; }
 .familybar a:hover { color: var(--white); text-decoration-color: var(--cobalt-hi); }
 
 /* ---- Header ---- */
-.site-header { position: sticky; top: 0; z-index: 100; background: rgba(245,239,227,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: box-shadow var(--dur), border-color var(--dur); }
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba(244,234,210,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: box-shadow var(--dur), border-color var(--dur); }
 .site-header.scrolled { box-shadow: var(--shadow); border-color: var(--line); }
 .header__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 76px; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
@@ -405,6 +405,17 @@ section[id], article[id] { scroll-margin-top: 90px; }
 .mobile-bar .btn { flex: 1; }
 .mobile-bar .btn-espresso { flex: 0 0 auto; padding: 14px 16px; background: var(--cobalt); border-color: var(--cobalt); }
 @media (max-width: 760px) { .mobile-bar { display: flex; } body { padding-bottom: 72px; } }
+
+/* ---- Mobile navigation (off-canvas dropdown panel below the header) ---- */
+@media (max-width: 980px) {
+  .nav__toggle { display: inline-flex; }
+  .nav { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 2px; background: var(--sand); padding: 12px var(--gutter) 22px; border-bottom: 1px solid var(--line); border-top: 1px solid var(--line); box-shadow: var(--shadow-lg); transform: translateY(-12px); opacity: 0; pointer-events: none; transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease); }
+  .nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .nav > a, .nav .dd__toggle { padding: 13px 10px; border-bottom: 1px solid var(--line); border-radius: 0; font-size: 1.05rem; }
+  .nav__cta { margin: 10px 0 0; }
+  .nav .dd { width: 100%; }
+  .nav .dd__menu { position: static; box-shadow: none; border: 0; background: var(--sand-2); margin: 4px 0 8px; right: auto; min-width: 0; }
+}
 
 /* ---- Utility ---- */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }

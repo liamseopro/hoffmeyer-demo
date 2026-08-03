@@ -41,14 +41,14 @@ const options = [...pillars.map((p) => p.name), 'Financing & rentals', 'Emergenc
   // Submit by fetch so the visitor never lands on the raw webhook response.
   // Wires every .qcard on the page (the component may render more than once).
   document.querySelectorAll('form.qcard').forEach((el) => {
-    const form = el;
+    const form = el as HTMLFormElement;
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const btn = form.querySelector('button[type="submit"]');
-      const done = form.querySelector('.qcard__done');
-      const note = form.querySelector('.qcard__note');
-      const honey = form.querySelector('input[name="_honey"]');
-      const label = btn?.querySelector('.btn__label');
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+      const done = form.querySelector('.qcard__done') as HTMLElement | null;
+      const note = form.querySelector('.qcard__note') as HTMLElement | null;
+      const honey = form.querySelector('input[name="_honey"]') as HTMLInputElement | null;
+      const label = (btn?.querySelector('.btn__label') || null) as HTMLElement | null;
       if (!btn || !done) return;
       btn.disabled = true;
       if (label) label.textContent = 'Sending...';
@@ -57,8 +57,8 @@ const options = [...pillars.map((p) => p.name), 'Financing & rentals', 'Emergenc
           await fetch(form.action, { method: 'POST', mode: 'no-cors', body: new FormData(form) });
         }
         form.querySelectorAll('.field').forEach((f) => f.setAttribute('hidden', ''));
-        const sub = form.querySelector('.qcard__sub');
-        const h3 = form.querySelector('.qcard > h3');
+        const sub = form.querySelector('.qcard__sub') as HTMLElement | null;
+        const h3 = form.querySelector('.qcard > h3') as HTMLElement | null;
         if (h3) h3.hidden = true;
         if (sub) sub.hidden = true;
         btn.hidden = true;

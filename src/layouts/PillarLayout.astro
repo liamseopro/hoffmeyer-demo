@@ -21,7 +21,7 @@ const breadcrumb = JSON.stringify({
   ],
 });
 ---
-<Base title={title} description={description} path={`/${pillar.slug}/`} active={pillar.slug} schemaBlocks={[breadcrumb, ...schemaBlocks]}>
+<Base title={title} description={description} path={`/${pillar.slug}/`} active={pillar.slug} ogImage={`${site.url}${pillar.image}`} schemaBlocks={[breadcrumb, ...schemaBlocks]}>
 
   <section class="section pillar-detail">
     <div class="container pillar-detail__wrap">
